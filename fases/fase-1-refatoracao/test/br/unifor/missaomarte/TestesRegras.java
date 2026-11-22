@@ -72,12 +72,13 @@ public class TestesRegras {
         teste("fábrica respeita as quantidades da dificuldade", TestesRegras::fabricaRespeitaQuantidades);
         teste("fábrica não sobrepõe elementos nem ocupa a plataforma", TestesRegras::fabricaNaoSobrepoe);
         teste("mesma semente gera o mesmo mapa", TestesRegras::mesmaSementeMesmoMapa);
+        teste("mapa pequeno demais é recusado", TestesRegras::mapaPequenoDemais);
         teste("serviço registra no ranking só quem entra no Top 5", TestesRegras::servicoRegistraSoTop5);
         teste("falha ao salvar é informada sem perder a vaga", TestesRegras::falhaAoSalvar);
         teste("partida cumprida gera resumo e entra no ranking", TestesRegras::partidaCumpridaGeraResumo);
 
         // Infraestrutura
-        teste("ranking.json grava e lê os registros", TestesRegras::jsonIdaEVolta);
+        teste("ranking.json grava e lê nomes com vírgula, aspas e chaves", TestesRegras::jsonIdaEVolta);
         teste("ranking.json ausente ou malformado vira ranking vazio", TestesRegras::jsonAusenteOuMalformado);
         teste("ranking.json da fase 0 continua legível", TestesRegras::jsonDaFase0);
         teste("limpar apaga o ranking.json", TestesRegras::limparApagaArquivo);
@@ -273,6 +274,13 @@ public class TestesRegras {
         }
     }
 
+    static void mapaPequenoDemais() {
+        falso(FabricaMissao.cabeNoMapa(Dificuldade.DIFICIL, new Mapa(1)), "difícil em 3x3");
+        verdadeiro(FabricaMissao.cabeNoMapa(Dificuldade.FACIL, new Mapa(1)), "fácil em 3x3");
+        lanca(IllegalArgumentException.class,
+                () -> new FabricaMissao(new Random(1)).criar(Dificuldade.MEDIO, new Mapa(1)), "criar");
+    }
+
     static void servicoRegistraSoTop5() {
         RepositorioEmMemoria repositorio = new RepositorioEmMemoria();
         ServicoRanking servico = new ServicoRanking(repositorio);
@@ -295,7 +303,7 @@ public class TestesRegras {
     static void partidaCumpridaGeraResumo() {
         RepositorioEmMemoria repositorio = new RepositorioEmMemoria();
         repositorio.salvos.add(registro("Recordista", 99));
-        Clock relogio = Clock.fixed(Instant.parse("2026-11-22T13:00:01Z"), ZoneOffset.UTC);
+        Clock relogio = Clock.fixed(Instant.parse("2026-11-22T13:00:00Z"), ZoneOffset.UTC);
 
         Missao missao = missaoVazia(3, 20);
         missao.adicionarPassageiro(new Professor("Dr. Silva", new Posicao(1, 0)));
@@ -310,7 +318,7 @@ public class TestesRegras {
         igual(1, resumo.passageirosResgatados(), "resgatados");
         igual("Recordista", resumo.recordeAnterior().nome(), "recorde anterior");
         verdadeiro(resumo.resultadoRanking().entrouNoTop(), "entrou no ranking");
-        igual("2026-11-22 13:00:01", repositorio.salvos.get(1).dataHora(), "data formatada");
+        igual("2026-11-22 13:00:00", repositorio.salvos.get(1).dataHora(), "data formatada");
     }
 
     // ========================================================= infraestrutura
@@ -320,7 +328,7 @@ public class TestesRegras {
         try {
             RepositorioRankingJson repositorio = new RepositorioRankingJson(arquivo);
             List<RegistroRanking> originais = List.of(
-                    new RegistroRanking("Ana", 42, Dificuldade.FACIL, 4, "2026-11-22 10:00:00", 30),
+                    new RegistroRanking("Silva, João \"Jo\" {1} \\ fim", 42, Dificuldade.FACIL, 4, "2026-11-22 10:00:00", 30),
                     new RegistroRanking("Bia", 50, Dificuldade.DIFICIL, 5, "2026-11-22 11:00:00", 12));
             repositorio.salvar(originais);
             igual(originais, repositorio.carregar(), "registros lidos");

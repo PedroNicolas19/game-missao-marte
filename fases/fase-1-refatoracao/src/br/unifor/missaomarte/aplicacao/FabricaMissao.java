@@ -32,7 +32,18 @@ public class FabricaMissao {
         this.random = random;
     }
 
+    /** Há casas para a nave e todos os elementos da dificuldade? Sem isso, o sorteio nunca termina. */
+    public static boolean cabeNoMapa(Dificuldade dificuldade, Mapa mapa) {
+        int elementos = 1 + dificuldade.getQuantidadePassageiros()
+                + dificuldade.getQuantidadeAsteroides() + dificuldade.getQuantidadeInimigos();
+        return mapa.getTotalDeCasas() >= elementos;
+    }
+
     public Missao criar(Dificuldade dificuldade, Mapa mapa) {
+        if (!cabeNoMapa(dificuldade, mapa)) {
+            throw new IllegalArgumentException("Mapa de tamanho " + mapa.getTamanho()
+                    + " não comporta a dificuldade " + dificuldade);
+        }
         Missao missao = new Missao(new Nave(ID_NAVE, CAPACIDADE_NAVE), mapa,
                 dificuldade.getPontuacaoInicial(), random);
 

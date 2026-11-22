@@ -1,5 +1,6 @@
 package br.unifor.missaomarte.console;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 /** Leitura do teclado. Isola o Scanner do resto da interface. */
@@ -11,23 +12,22 @@ class EntradaConsole {
         this.scanner = scanner;
     }
 
-    /** Mostra o prompt e lê uma linha sem espaços nas pontas; no fim da entrada, devolve o padrão. */
-    String lerLinha(String prompt, String padrao) {
+    /**
+     * Mostra o prompt e lê uma linha sem espaços nas pontas.
+     * Devolve vazio quando a entrada termina (Ctrl+D / fim do arquivo).
+     */
+    Optional<String> ler(String prompt) {
         if (prompt != null && !prompt.isEmpty()) {
             System.out.print(prompt);
         }
         if (scanner.hasNextLine()) {
-            return scanner.nextLine().trim();
+            return Optional.of(scanner.nextLine().trim());
         }
-        return padrao;
+        return Optional.empty();
     }
 
-    boolean temProximaLinha() {
-        return scanner.hasNextLine();
-    }
-
-    /** Consome uma linha (por exemplo, o Enter de "Pressione Enter"). */
-    void descartarLinha() {
-        scanner.nextLine();
+    /** Como {@link #ler(String)}, mas usa o valor padrão quando a entrada termina. */
+    String lerLinha(String prompt, String padrao) {
+        return ler(prompt).orElse(padrao);
     }
 }

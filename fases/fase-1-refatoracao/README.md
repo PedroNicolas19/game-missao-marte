@@ -1,6 +1,6 @@
 # Fase 1 — Refatoração em camadas
 
-O mesmo jogo da Fase 0, reorganizado em camadas: domínio, aplicação, infraestrutura e console. As regras foram preservadas. As decisões, os diagramas antes/depois e as regras de referência estão em [docs/arquitetura.md](docs/arquitetura.md).
+O mesmo jogo da Fase 0, reorganizado em camadas: domínio, aplicação, infraestrutura e console. As regras foram preservadas, e quatro bugs da Fase 0 foram corrigidos. As decisões, os diagramas antes/depois e as regras de referência estão em [docs/arquitetura.md](docs/arquitetura.md).
 
 ## Estrutura
 
@@ -61,4 +61,4 @@ javac -encoding UTF-8 -d out $files
 java -cp out br.unifor.missaomarte.TestesRegras
 ```
 
-Resultado esperado: `24 aprovados, 0 com falha`. Se algum teste falhar, o comando termina com código 1.
+Resultado esperado: `25 aprovados, 0 com falha`. Se algum teste falhar, o comando termina com código 1.

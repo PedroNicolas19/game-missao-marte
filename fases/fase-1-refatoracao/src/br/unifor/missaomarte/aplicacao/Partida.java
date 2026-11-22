@@ -12,6 +12,7 @@ import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ import java.util.List;
  * missão, mede o tempo e, quando a missão é cumprida, registra o resultado no ranking.
  */
 public class Partida {
+
+    private static final DateTimeFormatter FORMATO_DATA_HORA = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final String piloto;
     private final Dificuldade dificuldade;
@@ -62,7 +65,7 @@ public class Partida {
     }
 
     private String agoraFormatado() {
-        return LocalDateTime.now(relogio).toString().substring(0, 19).replace('T', ' ');
+        return LocalDateTime.now(relogio).format(FORMATO_DATA_HORA);
     }
 
     public String getPiloto() { return piloto; }

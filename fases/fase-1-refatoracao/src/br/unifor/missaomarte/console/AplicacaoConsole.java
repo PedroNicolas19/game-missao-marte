@@ -1,5 +1,7 @@
 package br.unifor.missaomarte.console;
 
+import java.util.Optional;
+
 /** Menu principal: direciona para partida, ranking ou saída. */
 class AplicacaoConsole {
 
@@ -18,13 +20,13 @@ class AplicacaoConsole {
 
         boolean rodando = true;
         while (rodando) {
-            if (!entrada.temProximaLinha()) {
+            exibirMenu();
+            Optional<String> opcao = entrada.ler("Escolha uma opção: ");
+            if (opcao.isEmpty()) {
                 System.out.println("\nEntrada encerrada. Obrigado por jogar!");
                 break;
             }
-            exibirMenu();
-            String opcao = entrada.lerLinha("Escolha uma opção: ", "1");
-            switch (opcao) {
+            switch (opcao.get()) {
                 case "1":
                     telaPartida.jogar();
                     break;

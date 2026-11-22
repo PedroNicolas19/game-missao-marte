@@ -16,6 +16,7 @@ import br.unifor.missaomarte.dominio.StatusMissao;
 
 import java.time.Clock;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Tela de uma partida: lê a configuração, mostra o mapa, traduz teclas em ações
@@ -48,14 +49,18 @@ class TelaPartida {
         }
         Dificuldade dificuldade = lerDificuldade();
         Mapa mapa = new Mapa(lerTamanhoMapa());
+        if (!FabricaMissao.cabeNoMapa(dificuldade, mapa)) {
+            System.out.println("Mapa pequeno demais para a dificuldade " + dificuldade
+                    + ", usando tamanho padrão (5).");
+            mapa = new Mapa(TAMANHO_PADRAO);
+        }
 
         System.out.println("\nIniciando missão na dificuldade " + dificuldade + "...");
         System.out.println("Pressione Enter para decolar!");
-        if (!entrada.temProximaLinha()) {
+        if (entrada.ler("").isEmpty()) {
             System.out.println("Entrada encerrada. Missão não iniciada.");
             return;
         }
-        entrada.descartarLinha();
 
         Missao missao = fabricaMissao.criar(dificuldade, mapa);
         Partida partida = new Partida(piloto, dificuldade, missao, servicoRanking, relogio);
@@ -68,12 +73,14 @@ class TelaPartida {
             renderizador.desenhar(missao, partida.getPiloto());
             exibirStatus(missao);
 
-            String comando = entrada.lerLinha("Comando (w/s/a/d/c/q): ", "").toLowerCase();
+            Optional<String> linha = entrada.ler("Comando (w/s/a/d/c/q): ");
+            if (linha.isEmpty()) {
+                System.out.println("Entrada encerrada. Missão abortada.");
+                partida.abortar();
+                continue;
+            }
+            String comando = linha.get().toLowerCase();
             if (comando.isEmpty()) {
-                if (!entrada.temProximaLinha()) {
-                    System.out.println("Entrada encerrada. Missão abortada.");
-                    partida.abortar();
-                }
                 continue;
             }
 

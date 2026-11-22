@@ -215,13 +215,29 @@ O domínio devolve **eventos** (`COLISAO`, `PASSAGEIRO_EMBARCADO`, `MISSAO_CUMPR
 | **Objeto de valor** | `Posicao` (record imutável) | Substitui pares `x, y` soltos e as comparações repetidas |
 | **Encapsulamento** | listas devolvidas como somente leitura | Ninguém altera passageiros ou ranking sem passar pelas regras |
 
-## 7. Como verificamos que o comportamento foi preservado
+## 7. Mudanças intencionais de comportamento
+
+A refatoração foi feita em dois commits: primeiro só a reorganização, **sem mudar nada**; depois as correções abaixo, num commit separado (`fix(fase1): ...`).
+
+| Bug na Fase 0 | Correção na Fase 1 |
+| --- | --- |
+| O menu só aparecia **depois** que o jogador digitava algo: o programa esperava uma linha antes de mostrar as opções | O menu aparece primeiro e depois espera a opção |
+| Nomes de piloto com vírgula, aspas ou `}` sumiam do ranking, porque o JSON era lido separando o texto por vírgulas | Leitor de JSON que respeita textos entre aspas e caracteres escapados |
+| Mapa de tamanho 1 nas dificuldades Média e Difícil travava o jogo: há 9 casas para 10 ou 12 elementos, e o sorteio nunca terminava | Se não couber, o jogo avisa e usa o tamanho padrão (5) |
+| A data do ranking era cortada com `substring(0, 19)`, que falha quando o horário cai exatamente no segundo :00 com 0 nanossegundos | Data formatada com `DateTimeFormatter` |
+
+Outro efeito da primeira correção: uma linha vazia durante a partida agora redesenha o mapa. Antes, o jogo ficava esperando outra linha sem mostrar nada.
+
+O formato do `ranking.json` não mudou: arquivos gravados pela Fase 0 são lidos pela Fase 1, e vice-versa.
+
+## 8. Como verificamos que o comportamento foi preservado
 
 1. **Comparação com a Fase 0.** As duas versões foram compiladas com o sorteio usando a mesma semente (`new Random(semente)`). Um jogador automático, que decide cada comando lendo o mapa impresso, jogou 80 sessões em cada versão: 320 partidas, com 273 vitórias, derrotas por colisão e por pontuação, embarques, recordes, Top 5, reset do ranking e entradas inválidas.
    - Após o commit de refatoração, as saídas foram **idênticas** nas 80 sessões.
-2. **Testes automáticos** (`test/br/unifor/missaomarte/TestesRegras.java`): 24 testes das regras de domínio, aplicação e do `ranking.json`. Para conferir que os testes detectam erros, alteramos de propósito três regras (pontos do Professor, custo do movimento e regra de entrada no Top 5): em todos os casos, pelo menos um teste falhou.
+   - Após o commit de correções, as saídas continuaram idênticas, exceto pelo momento em que o menu aparece.
+2. **Testes automáticos** (`test/br/unifor/missaomarte/TestesRegras.java`): 25 testes das regras de domínio, aplicação e do `ranking.json`. Para conferir que os testes detectam erros, alteramos de propósito três regras (pontos do Professor, custo do movimento e regra de entrada no Top 5): em todos os casos, pelo menos um teste falhou.
 
-## 8. Limitações e próximos passos
+## 9. Limitações e próximos passos
 
 - Os testes ainda usam um mini-framework próprio; na **Fase 2** passam para JUnit 5 com Gradle.
 - O console não tem testes automáticos; ele foi verificado pela comparação com a Fase 0.
