@@ -1,0 +1,40 @@
+# ===== Java / compilação =====
+*.class
+out/
+bin/
+
+# ===== Gradle =====
+.gradle/
+build/
+# O Gradle Wrapper (gradlew, gradlew.bat e gradle/wrapper/*) DEVE ser versionado
+
+# ===== IDEs =====
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# ===== Android =====
+local.properties
+.cxx/
+*.apk
+*.aab
+*.jks
+*.keystore
+
+# ===== Dados gerados pelo jogo e pelo servidor =====
+ranking.json
+*.mv.db
+*.trace.db
+
+# ===== Segredos e configurações locais =====
+.env
+*.env
+application-local.properties
+
+# ===== Sistema operacional / logs =====
+.DS_Store
+Thumbs.db
+*.log
