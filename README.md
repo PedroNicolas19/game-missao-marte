@@ -56,6 +56,29 @@ javac -encoding UTF-8 -d out $files
 java -cp out Main
 ```
 
+### Fase 1 — refatoração em camadas (console)
+
+Linux/macOS:
+
+```bash
+cd fases/fase-1-refatoracao
+javac -encoding UTF-8 -d out $(find src test -name '*.java')
+java -cp out br.unifor.missaomarte.TestesRegras      # testes
+java -cp out br.unifor.missaomarte.console.Main      # jogo
+```
+
+Windows (PowerShell):
+
+```powershell
+cd fases\fase-1-refatoracao
+$files = Get-ChildItem -Recurse src, test -Filter *.java | ForEach-Object FullName
+javac -encoding UTF-8 -d out $files
+java -cp out br.unifor.missaomarte.TestesRegras
+java -cp out br.unifor.missaomarte.console.Main
+```
+
+Arquitetura, decisões e diagramas: [fases/fase-1-refatoracao/docs/arquitetura.md](fases/fase-1-refatoracao/docs/arquitetura.md).
+
 > As instruções das próximas fases serão adicionadas aqui conforme cada fase for concluída.
 
 ## Organização do trabalho
