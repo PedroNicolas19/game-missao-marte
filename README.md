@@ -60,7 +60,7 @@ java -cp out Main
 
 ## Organização do trabalho
 
-- **Quadro Kanban (Trello):** [Missão Marte Unifor — Projeto Integrador](https://trello.com/b/3FImjvV9/miss%C3%A3o-marte-unifor-projeto-integrador)
+- **Trello:** [Missão Marte Unifor — Projeto Integrador](https://trello.com/b/3FImjvV9/miss%C3%A3o-marte-unifor-projeto-integrador)
 - Colunas: **Backlog** → **Em andamento** → **Em revisão** → **Concluído**.
 - Cada tarefa tem um responsável, a sprint e critérios de aceite.
 - Fluxo de cada tarefa:
