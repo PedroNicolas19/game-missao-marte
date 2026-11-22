@@ -18,14 +18,14 @@ Cada fase fica numa pasta própria em `fases/`. Uma fase nova começa como cópi
 
 | Fase | Pasta | Conteúdo | Situação |
 | --- | --- | --- | --- |
-| 0 | `fases/fase-0-inicial` | Projeto inicial em modo texto (versão base) | ⏳ Pendente |
-| 1 | `fases/fase-1-refatoracao` | Refatoração em camadas (domínio, aplicação, console, infraestrutura) | ⏳ Pendente |
-| 2 | `fases/fase-2-gradle` | Build com Gradle Wrapper e testes com JUnit 5 | ⏳ Pendente |
-| 3 | `fases/fase-3-libgdx` | Introdução ao libGDX (módulos `core` e desktop) | ⏳ Pendente |
-| 4 | `fases/fase-4-interface-grafica` | Interface gráfica com sprites, HUD, animações e áudio | ⏳ Pendente |
-| 5 | `fases/fase-5-servidor-ranking` | Servidor Spring Boot com ranking global e integração com o cliente | ⏳ Pendente |
-| 6 | `fases/fase-6-android` | Módulo Android e controles por toque | ⏳ Pendente |
-| 7 | `fases/fase-7-evolucao-livre` | Melhoria escolhida pela equipe | ⏳ Pendente |
+| 0 | `fases/fase-0-inicial` | Projeto inicial em modo texto (versão base) |
+| 1 | `fases/fase-1-refatoracao` | Refatoração em camadas (domínio, aplicação, console, infraestrutura) |
+| 2 | `fases/fase-2-gradle` | Build com Gradle Wrapper e testes com JUnit 5 |
+| 3 | `fases/fase-3-libgdx` | Introdução ao libGDX (módulos `core` e desktop) | 
+| 4 | `fases/fase-4-interface-grafica` | Interface gráfica com sprites, HUD, animações e áudio |
+| 5 | `fases/fase-5-servidor-ranking` | Servidor Spring Boot com ranking global e integração com o cliente | 
+| 6 | `fases/fase-6-android` | Módulo Android e controles por toque |
+| 7 | `fases/fase-7-evolucao-livre` | Melhoria escolhida pela equipe |
 
 ## Requisitos de ambiente
 
@@ -60,7 +60,7 @@ java -cp out Main
 
 ## Organização do trabalho
 
-- **Quadro Kanban (Trello):** _<link do quadro>_
+- **Quadro Kanban (Trello):** [Missão Marte Unifor — Projeto Integrador](https://trello.com/b/3FImjvV9/miss%C3%A3o-marte-unifor-projeto-integrador)
 - Colunas: **Backlog** → **Em andamento** → **Em revisão** → **Concluído**.
 - Cada tarefa tem um responsável, a sprint e critérios de aceite.
 - Fluxo de cada tarefa:
