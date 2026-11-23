@@ -1,0 +1,7 @@
+# Saídas do Gradle e de compilações antigas
+.gradle/
+build/
+out/
+
+# Gerado ao jogar
+ranking.json
