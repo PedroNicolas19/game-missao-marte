@@ -10,7 +10,7 @@ A equipe evolui o jogo **Missão Marte Unifor** em fases: começa com uma aplica
 | --- | --- |
 | Levi Costa Queiroz | [@levicostaq](https://github.com/levicostaq) |
 | Pedro Nicolas | [@PedroNicolas19](https://github.com/PedroNicolas19) |
-| Leonardo Norões | [@leomilfont](https://github.com/leomilfont) |
+| Leonardo de Norões Milfont | [@leomilfont](https://github.com/leomilfont) |
 
 ## Fases
 
@@ -18,14 +18,14 @@ Cada fase fica numa pasta própria em `fases/`. Uma fase nova começa como cópi
 
 | Fase | Pasta | Conteúdo | Situação |
 | --- | --- | --- | --- |
-| 0 | `fases/fase-0-inicial` | Projeto inicial em modo texto (versão base) |
-| 1 | `fases/fase-1-refatoracao` | Refatoração em camadas (domínio, aplicação, console, infraestrutura) |
-| 2 | `fases/fase-2-gradle` | Build com Gradle Wrapper e testes com JUnit 5 |
-| 3 | `fases/fase-3-libgdx` | Introdução ao libGDX (módulos `core` e desktop) | 
-| 4 | `fases/fase-4-interface-grafica` | Interface gráfica com sprites, HUD, animações e áudio |
-| 5 | `fases/fase-5-servidor-ranking` | Servidor Spring Boot com ranking global e integração com o cliente | 
-| 6 | `fases/fase-6-android` | Módulo Android e controles por toque |
-| 7 | `fases/fase-7-evolucao-livre` | Melhoria escolhida pela equipe |
+| 0 | `fases/fase-0-inicial` | Projeto inicial em modo texto (versão base) | Feito
+| 1 | `fases/fase-1-refatoracao` | Refatoração em camadas (domínio, aplicação, console, infraestrutura) | Feito
+| 2 | `fases/fase-2-gradle` | Build com Gradle Wrapper e testes com JUnit 5 | Em revisão
+| 3 | `fases/fase-3-libgdx` | Introdução ao libGDX (módulos `core` e desktop) | Pendente
+| 4 | `fases/fase-4-interface-grafica` | Interface gráfica com sprites, HUD, animações e áudio | Pendente
+| 5 | `fases/fase-5-servidor-ranking` | Servidor Spring Boot com ranking global e integração com o cliente | Pendente
+| 6 | `fases/fase-6-android` | Módulo Android e controles por toque | Pendente
+| 7 | `fases/fase-7-evolucao-livre` | Melhoria escolhida pela equipe | Pendente
 
 ## Requisitos de ambiente
 
