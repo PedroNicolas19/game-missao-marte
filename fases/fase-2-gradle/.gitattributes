@@ -1,0 +1,4 @@
+# O script do wrapper precisa de LF para rodar no Linux/macOS, e o .bat de CRLF no Windows.
+gradlew      text eol=lf
+*.bat        text eol=crlf
+*.jar        binary

@@ -79,6 +79,28 @@ java -cp out br.unifor.missaomarte.console.Main
 
 Arquitetura, decisões e diagramas: [fases/fase-1-refatoracao/docs/arquitetura.md](fases/fase-1-refatoracao/docs/arquitetura.md).
 
+### Fase 2 — Gradle e testes JUnit 5 (console)
+
+Requer JDK 17. O Gradle não precisa estar instalado: o wrapper baixa a versão 8.7.
+
+Linux/macOS:
+
+```bash
+cd fases/fase-2-gradle
+./gradlew build                 # compila e roda os 36 testes
+./gradlew run --console=plain   # jogo
+```
+
+Windows (PowerShell):
+
+```powershell
+cd fases\fase-2-gradle
+.\gradlew.bat build
+.\gradlew.bat run --console=plain
+```
+
+Tutorial da migração, conceitos de Gradle e evidências: [fases/fase-2-gradle/docs/tutorial.md](fases/fase-2-gradle/docs/tutorial.md).
+
 > As instruções das próximas fases serão adicionadas aqui conforme cada fase for concluída.
 
 ## Organização do trabalho

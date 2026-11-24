@@ -1,0 +1,46 @@
+plugins {
+    // Adiciona as tarefas run, installDist, distZip e startScripts.
+    id 'application'
+}
+
+group = 'br.unifor'
+version = '2.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Acentos do código e das mensagens funcionam em qualquer sistema (inclusive Windows).
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+application {
+    mainClass = 'br.unifor.missaomarte.console.Main'
+}
+
+// Sem isto o Scanner(System.in) do jogo não recebe o teclado no "gradlew run".
+tasks.named('run') {
+    standardInput = System.in
+}
+
+dependencies {
+    // O jogo não tem dependências de execução; só os testes usam bibliotecas.
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    // O launcher é obrigatório no Gradle 9 e opcional no 8.7.
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    // Mostra o resultado de cada teste no console.
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
+}
